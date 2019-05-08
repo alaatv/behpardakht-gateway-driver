@@ -2,12 +2,10 @@
 
 namespace AlaaTV\BehpardakhtDriver;
 
-use AlaaTV\Gateways\Contracts\IranianCurrency;
-use AlaaTV\Gateways\Contracts\OnlineGateway;
-use AlaaTV\Gateways\Contracts\OnlinePaymentVerificationResponseInterface;
-use AlaaTV\Gateways\RedirectData;
 use DateTime;
+use AlaaTV\Gateways\RedirectData;
 use Illuminate\Support\Facades\Input;
+use AlaaTV\Gateways\Contracts\{OnlineGateway, IranianCurrency, OnlinePaymentVerificationResponseInterface};
 
 class BehpardakhtGateWay implements OnlineGateway
 {
@@ -32,17 +30,16 @@ class BehpardakhtGateWay implements OnlineGateway
             $response = $this->makeSoapClient()
                 ->bpPayRequest($fields);
         } catch (\SoapFault $e) {
-            return nullable(null);
+            return null;
         }
 
         $response = explode(',', $response->return);
 
         if ($response[0] != '0') {
-            $msg = ErrorMsgRepository::getMsg($response[0]);
-            return nullable(null, [$msg]);
+            return null;
         }
 
-        return nullable($response[1]);
+        return $response[1];
     }
     
     public function generatePaymentPageUriObject($refId): RedirectData

@@ -2,6 +2,7 @@
 
 namespace AlaaTV\BehpardakhtDriver;
 
+use AlaaTV\Gateways\PaymentDriver;
 use Illuminate\Support\ServiceProvider;
 
 class BehpardakhtServiceProvider extends ServiceProvider

@@ -2,7 +2,7 @@
 
 namespace AlaaTV\BehpardakhtDriver;
 
-use App\PaymentModule\OnlinePaymentVerificationResponseInterface;
+use AlaaTV\Gateways\Contracts\OnlinePaymentVerificationResponseInterface;
 
 class VerificationResponse implements OnlinePaymentVerificationResponseInterface
 {

@@ -2,9 +2,9 @@
 
 namespace AlaaTV\BehpardakhtDriver;
 
-use AlaaTV\Gateways\IranianCurrency;
-use AlaaTV\Gateways\OnlineGateway;
-use AlaaTV\Gateways\OnlinePaymentVerificationResponseInterface;
+use AlaaTV\Gateways\Contracts\IranianCurrency;
+use AlaaTV\Gateways\Contracts\OnlineGateway;
+use AlaaTV\Gateways\Contracts\OnlinePaymentVerificationResponseInterface;
 use AlaaTV\Gateways\RedirectData;
 use DateTime;
 use Illuminate\Support\Facades\Input;

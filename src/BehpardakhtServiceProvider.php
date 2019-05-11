@@ -11,7 +11,7 @@ class BehpardakhtServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/config.php', 'behpardakht');
 
-        PaymentDriver::addDriver('mellat', BehpardakhtGateWay::class, 4);
+        PaymentDriver::addDriver('mellat', BehpardakhtGateWay::class);
     }
 
     public function boot()

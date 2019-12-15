@@ -5,7 +5,6 @@ namespace AlaaTV\BehpardakhtDriver;
 use DateTime;
 use AlaaTV\Gateways\RedirectData;
 use AlaaTV\Gateways\Contracts\{OnlineGateway, IranianCurrency, OnlinePaymentVerificationResponseInterface};
-use Illuminate\Http\Request;
 
 class BehpardakhtGateWay implements OnlineGateway
 {
@@ -54,7 +53,7 @@ class BehpardakhtGateWay implements OnlineGateway
     
     public function getAuthorityValue(): string
     {
-        return Request::input('RefId', '');
+        return \Request::input('RefId', '');
     }
     
     public function verifyPayment(IranianCurrency $amount, $authority): OnlinePaymentVerificationResponseInterface
@@ -71,18 +70,18 @@ class BehpardakhtGateWay implements OnlineGateway
          * "_token" => "CATNE2rXs0TWtSh2I4aFNyqpYMOq15cLGwVgcKpD"`
          * ]
          */
-//        if ($amount->rials() !== Request::input('FinalAmount')) {
+//        if ($amount->rials() !== \Request::input('FinalAmount')) {
 //            return 'fake request.';
 //        }
         /*
-        $refId             = Request::input('RefId');
-        $trackingCode      = Request::input('SaleReferenceId');
-        $cardNumber        = Request::input('CardHolderPan');
-        $resCode           = Request::input('ResCode');
-        $saleOrderId       = Request::input('SaleOrderId');*/
+        $refId             = \Request::input('RefId');
+        $trackingCode      = \Request::input('SaleReferenceId');
+        $cardNumber        = \Request::input('CardHolderPan');
+        $resCode           = \Request::input('ResCode');
+        $saleOrderId       = \Request::input('SaleOrderId');*/
 
-        if (Request::input('ResCode') != 0) {
-            return VerificationResponse::instance(request()->all(), false, Request::input('ResCode'));
+        if (\Request::input('ResCode') != 0) {
+            return VerificationResponse::instance(request()->all(), false, \Request::input('ResCode'));
         }
 
         $response = $this->verify();
@@ -97,7 +96,7 @@ class BehpardakhtGateWay implements OnlineGateway
             return VerificationResponse::instance(request()->all(), false, $response->return);
         }
 
-        return VerificationResponse::instance(request()->all(), true, Request::input('ResCode'));
+        return VerificationResponse::instance(request()->all(), true, \Request::input('ResCode'));
     }
     
     protected function settleRequest()
@@ -128,9 +127,9 @@ class BehpardakhtGateWay implements OnlineGateway
             'terminalId'      => config('behpardakht.terminalId'),
             'userName'        => config('behpardakht.username'),
             'userPassword'    => config('behpardakht.password'),
-            'orderId'         => Request::input('SaleOrderId'),
-            'saleOrderId'     => Request::input('SaleOrderId'),
-            'saleReferenceId' => Request::input('SaleReferenceId'),
+            'orderId'         => \Request::input('SaleOrderId'),
+            'saleOrderId'     => \Request::input('SaleOrderId'),
+            'saleReferenceId' => \Request::input('SaleReferenceId'),
         ];
     }
     

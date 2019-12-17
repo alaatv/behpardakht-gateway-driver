@@ -41,12 +41,16 @@ class BehpardakhtGateWay implements OnlineGateway
         return $response[1];
     }
     
-    public function generatePaymentPageUriObject($refId): RedirectData
+    public function generatePaymentPageUriObject($refId , $mobile): RedirectData
     {
         $serverUrl = 'https://bpm.shaparak.ir/pgwchannel/startpay.mellat';
         $data      = [
             ['name' => 'RefId', 'value' => $refId,]
         ];
+        
+         if(isset($mobile)){
+            $data[] = ['name' => 'MobileNo' , 'value' => $mobile] ;
+        }
     
         return RedirectData::instance($serverUrl, $data, 'POST');
     }
